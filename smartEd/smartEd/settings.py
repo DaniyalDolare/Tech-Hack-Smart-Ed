@@ -40,7 +40,7 @@ INSTALLED_APPS = [
     'accounts',
     'base',
     'course',
-    'reward'
+    'reward',
 ]
 
 MIDDLEWARE = [

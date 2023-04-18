@@ -1,4 +1,4 @@
-"""smartEd URL Configuration
+"""smartEd RL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/4.1/topics/http/urls/
@@ -18,8 +18,8 @@ from django.urls import path,include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('/', include('base.urls','base')),
-    path('accounts/', include('accounts.urls','accounts')),
-    path('course/', include('course.urls','course')),
-    path('reward/', include('reward.urls','reward')),
+    path('', include('base.urls'),name='base'),
+    path('accounts/', include('accounts.urls'), name='accounts'),
+    path('course/', include('course.urls'), name='course'),
+    path('reward/', include('reward.urls'), name='reward'),
 ]
