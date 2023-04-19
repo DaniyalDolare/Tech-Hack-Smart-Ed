@@ -1,5 +1,18 @@
 from django.db import models
 from accounts.models import Teacher,Student
+from django.core.validators import FileExtensionValidator
+
+
+video_extensions = ['.mp4', '.mov', '.avi', '.wmv', '.mkv', '.flv']
+photo_extensions = ['.jpg', '.jpeg', '.png', '.gif', '.bmp', '.svg']
+pdf_extensions = ['.pdf']
+document_extensions = ['.doc', '.docx', '.txt', '.rtf', '.odt', '.wps']
+presentation_extensions = ['.ppt', '.pptx', '.odp', '.key']
+csv_extensions = ['.csv']
+text_extensions = ['.txt']
+
+EXTENSIONS = ['.mp4', '.mov', '.avi', '.wmv', '.mkv', '.flv','.jpg','.pdf', '.jpeg', '.png', '.gif', '.bmp', '.svg','.doc', '.docx', '.txt', '.rtf', '.odt', '.wps','.ppt', '.pptx', '.odp', '.key','.cvs','.txt']
+
 
 class Course(models.Model):
     name = models.CharField(max_length=255)
@@ -12,6 +25,7 @@ class Course(models.Model):
 class Lesson(models.Model):
     name = models.CharField(max_length=255)
     description = models.TextField()
+    content = models.FileField(blank=True,upload_to = 'content/',validators=[FileExtensionValidator(allowed_extensions=EXTENSIONS)])
     course = models.ForeignKey(Course, on_delete=models.CASCADE)
 
     def __str__(self):
