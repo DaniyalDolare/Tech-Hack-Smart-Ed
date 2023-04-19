@@ -4,7 +4,7 @@ from django.contrib import messages
 from django.views import View
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.mixins import LoginRequiredMixin
-
+from django.views.generic.base import TemplateView
 
 
 class SignupView(View):
@@ -59,3 +59,6 @@ class HomeView(LoginRequiredMixin,View):
 
     def get(self, request, *args, **kwargs):
         return render(request, self.template_name)
+    
+class OptionView(TemplateView):
+    template_name = 'user_role.html'
