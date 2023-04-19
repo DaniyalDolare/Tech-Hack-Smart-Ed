@@ -1,38 +1,62 @@
+{%load static%}
 <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="{% static 'base/css/courses.css' %}" type="text/css">
     <title>Courses</title>
   </head>
   <body>
     <div class="container">
+
+      <div id="mySidenav" class="sidenav">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+        <a href="#">About</a>
+        <a href="#">Services</a>
+        <a href="#">Clients</a>
+        <a href="#">Contact</a>
+      </div>
+
       {% if user.teacher %}
-      <a href="{% url 'course:add-course' %}">Add Course</a>
+      <a href="{% url 'course:add-course' %}" class="btn">Add Course</a>
       {% endif %}
-      <h1>{% if user.student %}Enrolled{% else %}Owned{% endif %} Courses</h1>
+      <button onclick="openNav()" class="nav_btn">&#9776;</button>
+      <h2>{% if user.student %}Enrolled{% else %}Owned{% endif %} Courses</h2>
       <hr />
 
-      {% if user.student %} {% if courses %}
-      <h3>Enrolled Courses:</h3>
-      <ul>
+      <div class="card_container">
+
+        {% if user.student %} {% if courses %}
         {% for enrolled in courses %}
-        <li>{{ enrolled }}</li>
+        <div class="card">{{ enrolled }}</div>
         {% endfor %}
-      </ul>
+
       {% else %}
       <p>No courses enrolled yet.</p>
       {% endif %} {% else %} {% if courses %}
-      <h3>Owned Courses:</h3>
-      <ul>
         {% for course in courses %}
-        <li>{{ course.name }}</li>
+        <div class="card">{{ course.name }}
+          <p>{{course.description}}</p>
+        </div>
         {% endfor %}
-      </ul>
+
       {% else %}
       <p>No courses owned yet.</p>
       {% endif %} {% endif %}
+
+      </div>
+
     </div>
   </body>
+  <script>
+    function openNav() {
+      document.getElementById("mySidenav").style.width = "250px";
+    }
+    
+    function closeNav() {
+      document.getElementById("mySidenav").style.width = "0";
+    }
+    </script>
 </html>
