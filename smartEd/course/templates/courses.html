@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Courses</title>
+  </head>
+  <body>
+    <div class="container">
+      {% if user.teacher %}
+      <a href="{% url 'course:add-course' %}">Add Course</a>
+      {% endif %}
+      <h1>{% if user.student %}Enrolled{% else %}Owned{% endif %} Courses</h1>
+      <hr />
+
+      {% if user.student %} {% if courses %}
+      <h3>Enrolled Courses:</h3>
+      <ul>
+        {% for enrolled in courses %}
+        <li>{{ enrolled }}</li>
+        {% endfor %}
+      </ul>
+      {% else %}
+      <p>No courses enrolled yet.</p>
+      {% endif %} {% else %} {% if courses %}
+      <h3>Owned Courses:</h3>
+      <ul>
+        {% for course in courses %}
+        <li>{{ course.name }}</li>
+        {% endfor %}
+      </ul>
+      {% else %}
+      <p>No courses owned yet.</p>
+      {% endif %} {% endif %}
+    </div>
+  </body>
+</html>
