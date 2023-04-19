@@ -2,8 +2,10 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
 from django.contrib import messages
 from django.views import View
+from django.views.generic import TemplateView
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.views.generic.base import TemplateView
 from . import models
 
     
@@ -15,6 +17,8 @@ class SignupTeacherView(View):
     def post(self, request):
         username = request.POST.get('username')
         email = request.POST.get('email')
+        firstname = request.POST.get('firstname')
+        lastname = request.POST.get('lastname')
         password1 = request.POST.get('password')
         password2 = request.POST.get('password_confirm')
         sub_name = request.POST.get('sub_name')
@@ -32,7 +36,7 @@ class SignupTeacherView(View):
             messages.error(request, "Email already exists")
             return redirect('accounts:signup-teacher')
         
-        user = User.objects.create_user(username=username, email=email, password=password1)
+        user = User.objects.create_user(username=username,first_name=firstname,last_name=lastname, email=email, password=password1)
         user.save()
         teacher = models.Teacher.objects.create(user=user,subject=sub_name,school_name=school_name)
         teacher.save()
@@ -46,6 +50,8 @@ class SignupStudentView(View):
     
     def post(self, request):
         username = request.POST.get('username')
+        firstname = request.POST.get('firstname')
+        lastname = request.POST.get('lastname')
         email = request.POST.get('email')
         password1 = request.POST.get('password')
         password2 = request.POST.get('password_confirm')
@@ -64,7 +70,7 @@ class SignupStudentView(View):
             messages.error(request, "Email already exists")
             return redirect('accounts:signup-student')
         
-        user = User.objects.create_user(username=username, email=email, password=password1)
+        user = User.objects.create_user(username=username, first_name=firstname,last_name=lastname, email=email, password=password1)
         user.save()
         student = models.Student.objects.create(user=user,standard=standard,school_name=school_name)
         student.save()
@@ -95,3 +101,6 @@ class HomeView(LoginRequiredMixin,View):
 
     def get(self, request, *args, **kwargs):
         return render(request, self.template_name)
+    
+class OptionView(TemplateView):
+    template_name = 'user_role.html'
