@@ -14,13 +14,13 @@
 <body>
     <h2>Choose your Role ?</h2>
     <div class="container">
-        <a href="" class="card"  data-tilt data-tilt-glare data-tilt-max="10" data-tilt-max-glare="0.5">
+        <a href="{% url 'accounts:signup-teacher'%}" class="card"  data-tilt data-tilt-glare data-tilt-max="10" data-tilt-max-glare="0.5">
             <div class="elements">
                 <i class="fa-solid fa-person-chalkboard"></i>
                 <h5>Teacher</h5>
             </div>
         </a>
-        <a href="" class="card"  data-tilt data-tilt-glare data-tilt-max="10" data-tilt-max-glare="0.5">
+        <a href="{% url 'accounts:signup-student'%}" class="card"  data-tilt data-tilt-glare data-tilt-max="10" data-tilt-max-glare="0.5">
             <div class="elements">
                 <i class="fa-solid fa-user-graduate" ></i>
                 <h5>Student</h5>
