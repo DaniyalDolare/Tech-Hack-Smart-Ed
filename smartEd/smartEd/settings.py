@@ -31,6 +31,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'jazzmin',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -41,7 +42,7 @@ INSTALLED_APPS = [
     'base',
     'course',
     'reward',
-    'jazzmin',
+    
 ]
 
 MIDDLEWARE = [
@@ -129,3 +130,23 @@ MEDIA_ROOT = BASE_DIR / 'media/'
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+JAZZMIN_SETTINGS = {
+    # title of the window (Will default to current_admin_site.site_title if absent or None)
+    "site_title": "SmartEd+ Admin",
+
+    # Title on the login screen (19 chars max) (defaults to current_admin_site.site_header if absent or None)
+    "site_header": "SmartEd+",
+
+    # Title on the brand (19 chars max) (defaults to current_admin_site.site_header if absent or None)
+    "site_brand": "SmartEd+",
+
+    # Logo to use for your site, must be present in static files, used for brand on top left
+    "site_logo": "base/images/web_logo.png",
+
+    # Logo to use for your site, must be present in static files, used for login form logo (defaults to site_logo)
+    "login_logo": "base/images/web_logo.png",
+
+    # Logo to use for login form in dark themes (defaults to login_logo)
+    "login_logo_dark": "base/images/web_logo.png",
+}

@@ -30,6 +30,12 @@ body
 	}
 }
 
+.container
+{
+    padding-top: 10vw;
+}
+
+
 .card-header
 {
     background-image: linear-gradient(to right,#00bfff,#0074ff);
