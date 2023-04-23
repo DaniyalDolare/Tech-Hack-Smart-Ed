@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from django.views.generic import View,ListView
+from django.views.generic import View,ListView,DetailView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from accounts.models import Student,Teacher
 from .models import *
@@ -54,4 +54,9 @@ class AddCourseView(LoginRequiredMixin,View):
             print(lesson.content)
             lesson.save()
 
-        return redirect('course:courses')
+        return redirect('courses:all')
+    
+class CourseView(LoginRequiredMixin,DetailView):
+    model = Course
+    template_name = 'course_detail.html'
+    

@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 from django.contrib import messages
 from django.views import View
 from django.views.generic import TemplateView
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login,logout
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic.base import TemplateView
 from . import models
@@ -94,9 +94,15 @@ class LoginView(View):
         else:
             messages.error(request, "Invalid login credentials")
             return redirect('accounts:login')
+        
+class LogoutView(View):
+
+    def get(self, request, *args, **kwargs):
+        logout(request)
+        return redirect('accounts:home')
 
 
-class HomeView(LoginRequiredMixin,View):
+class HomeView(View):
     template_name = 'base/home.html'
 
     def get(self, request, *args, **kwargs):
